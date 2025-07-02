@@ -1,0 +1,162 @@
+/* static/index.css */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+.main-container {
+    max-width: 480px;
+    margin: 60px auto;
+    background: #fff;
+    border-radius: 13px;
+    box-shadow: 0 0 18px rgba(221, 232, 250, 0.376);
+    padding: 36px 32px;
+    text-align: center; /* 전체 텍스트 중앙 정렬 */
+}
+
+h1 {
+    text-align: center;
+    color: #2471c6;
+    margin-bottom: 30px;
+    font-size: 2.2em;
+    font-weight: 700;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left; /* 폼 요소는 왼쪽 정렬 */
+}
+
+label {
+    font-weight: 600;
+    color: #222;
+    display: block; /* 라벨을 블록 레벨 요소로 만들어 줄바꿈 */
+    margin-bottom: 8px;
+    font-size: 1.05em;
+}
+
+input[type="number"],
+input[type="file"] {
+    font-size: 1em;
+    border: 1.2px solid #b0c5e8;
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: #f5fafd;
+    width: calc(100% - 24px); /* 패딩 고려하여 너비 조정 */
+    box-sizing: border-box; /* 패딩이 너비에 포함되도록 */
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none; /* iOS Safari에서의 기본 스타일 제거 */
+    -moz-appearance: none; /* Firefox에서 기본 스타일 제거 */
+    appearance: none; /* 모든 브라우저에서 기본 스타일 제거 */
+}
+
+input[type="file"] {
+    padding: 8px 12px; /* 파일 입력 필드는 패딩을 살짝 다르게 */
+    background-color: #eef5fb;
+    cursor: pointer;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+
+input[type="number"]:focus,
+input[type="file"]:focus {
+    border-color: #2471c6;
+    box-shadow: 0 0 0 3px rgba(36, 113, 198, 0.2);
+    outline: none;
+}
+
+input[type="submit"] {
+    background: #3ea1ff;
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.2s, transform 0.2s;
+    width: auto; /* submit 버튼은 자동 너비 */
+    display: inline-block; /* 중앙 정렬을 위해 */
+    font-size: 1.1em;
+    box-shadow: 0 4px 10px rgba(62, 161, 255, 0.2);
+}
+
+input[type="submit"]:hover {
+    background: #287fd9;
+    transform: translateY(-2px);
+}
+
+.preview-img {
+    display: none; /* 초기에는 숨김 */
+    margin: 25px auto 0;
+    max-width: 100%; /* 부모 컨테이너에 맞게 조절 */
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+}
+
+/* 로딩 스피너 */
+.global-loading {
+    display: none; /* 초기에는 숨김 */
+    position: fixed;
+    z-index: 2000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.85); /* 반투명 흰색 오버레이 */
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px); /* 배경 블러 효과 */
+    -webkit-backdrop-filter: blur(3px);
+}
+.global-loading.active {
+    display: flex; /* 활성화 시 표시 */
+}
+.loader {
+    border: 6px solid #f3f3f3; /* Light grey */
+    border-top: 6px solid #2471c6; /* Blue */
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    animation: spin 1.2s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 플래시 메시지 스타일 */
+.flash-message {
+    padding: 12px 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    opacity: 0.95;
+    animation: fadeOut 5s forwards; /* 5초 후 서서히 사라짐 */
+}
+
+.flash-message.error {
+    background-color: #e74c3c; /* Red for errors */
+}
+
+@keyframes fadeOut {
+    0% { opacity: 0.95; }
+    80% { opacity: 0.95; }
+    100% { opacity: 0; display: none; }
+}

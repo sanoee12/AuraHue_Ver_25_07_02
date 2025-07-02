@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuraHue - 이미지 업로드</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"> {# index.css 링크 #}
+</head>
+<body>
+    <div class="main-container">
+        <h1>사진 색채 분석</h1>
+        <form method="post" enctype="multipart/form-data" action="/upload">
+            <div class="form-group">
+                <label for="file">이미지 파일 선택:</label>
+                <input type="file" name="file" id="file" accept="image/*" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="n_colors">추출할 색상 개수:</label>
+                <input type="number" name="n_colors" id="n_colors" value="10" min="2" max="50">
+            <div style="margin-top:8px;">
+                <button type="button" onclick="setColors(10)">10개</button>
+                <button type="button" onclick="setColors(20)">20개</button>
+                <button type="button" onclick="setColors(30)">30개</button>
+                <button type="button" onclick="setColors(50)">50개</button>
+            </div>
+        </div>
+    <script>
+        function setColors(val) {
+        document.getElementById('n_colors').value = val;
+    }
+    </script>
+
+            {# 화이트밸런스 보정 체크박스 추가 #}
+            <div class="form-group checkbox-group">
+                <input type="checkbox" name="white_balance" id="white_balance" checked>
+                <label for="white_balance">화이트밸런스 보정 (선택)</label>
+            </div>
+
+            <input type="submit" value="분석하기">
+        </form>
+        
+        <img id="preview" src="" class="preview-img"> {# 이미지 미리보기 #}
+        
+        {# 로딩 스피너 #}
+        <div class="global-loading" id="globalLoading">
+            <div class="loader"></div>
+        </div>
+    </div>
+
+<script>
+    // 파일 선택 시 이미지 미리보기
+    document.getElementById('file').onchange = function(evt){
+        const [file] = this.files;
+        if(file){
+            const reader = new FileReader();
+            reader.onload = function(e){
+                const img = document.getElementById('preview');
+                img.src = e.target.result;
+                img.style.display = 'block'; // 이미지 표시
+            }
+            reader.readAsDataURL(file);
+        } else {
+            // 파일이 선택되지 않았을 때 미리보기 숨기기
+            document.getElementById('preview').style.display = 'none';
+            document.getElementById('preview').src = '';
+        }
+    };
+    
+    // 폼 제출 시 로딩 스피너 활성화
+    document.querySelector('form').addEventListener('submit', function(e) {
+        document.getElementById('globalLoading').classList.add('active');
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
